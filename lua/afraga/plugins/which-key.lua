@@ -26,6 +26,28 @@ return {
 				a = { "<cmd>:ChatGPTActAs<cr>", "Act as" }, -- additional options for creating the keymap
 				C = { "<cmd>:ChatGPTCompleteCode", "Code completion" }, -- just a label. don't create any mapping
 			},
+			d = {
+				name = "Dap Debugger",
+				c = { "<cmd>:lua require('dap').continue()<cr>", "Continue" },
+				t = { "<cmd>:lua require('dap-go').debug_test()<cr>", "Go Debug test" },
+				l = { "<cmd>:lua require('dap').run_last()<cr>", "Run last" },
+				s = { "<cmd>:lua require('dap').step_over()<cr>", "Step over" },
+				i = { "<cmd>:lua require('dap').step_into()<cr>", "Step into" },
+				o = { "<cmd>:lua require('dap').step_out()<cr>", "Step out" },
+				b = { "<cmd>:lua require('dap').toggle_breakpoint()<cr>", "Toggle breakpoint" },
+				C = {
+					"<cmd>:lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
+					"Set conditionnal breakpoint",
+				},
+				r = { "<cmd>:lua require('dap').repl.toggle()<cr>", "Toggle repl" },
+				R = { "<cmd>:lua require('dap').repl.open()<cr>", "Open repl" },
+			},
+			D = {
+				name = "Dap UI Debugger",
+				t = { "<cmd>:lua require('dapui').toggle()<cr>", "Toggle Dap UI" },
+				o = { "<cmd>:lua require('dapui').open()<cr>", "Open Dap UI" },
+				c = { "<cmd>:lua require('dapui').close()<cr>", "Close Dap UI" },
+			},
 			e = {
 				name = "Explorer",
 				e = { "<cmd>:NvimTreeToggle<cr>", "Toggle" },
