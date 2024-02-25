@@ -20,7 +20,7 @@ return {
 					"stacks",
 					"watches",
 				},
-				width = 40,
+				width = 25,
 				position = "left", -- Can be "left" or "right"
 			},
 			tray = {

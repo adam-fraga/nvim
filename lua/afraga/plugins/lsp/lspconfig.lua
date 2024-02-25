@@ -117,6 +117,12 @@ return {
 			on_attach = on_attach,
 		})
 
+		-- configure rust server
+		lspconfig["rust_analyzer"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
 		-- configure graphql language server
 		lspconfig["graphql"].setup({
 			capabilities = capabilities,
