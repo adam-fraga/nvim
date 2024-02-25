@@ -28,6 +28,7 @@ return {
 			},
 			d = {
 				name = "Dap Debugger",
+				x = { "<cmd>:DapTerminate<cr>", "Stop Debugger" },
 				c = { "<cmd>:lua require('dap').continue()<cr>", "Continue" },
 				t = { "<cmd>:lua require('dap-go').debug_test()<cr>", "Go Debug test" },
 				l = { "<cmd>:lua require('dap').run_last()<cr>", "Run last" },
