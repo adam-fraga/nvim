@@ -12,9 +12,9 @@ return {
 
 		telescope.setup({
 			defaults = {
-				search_dirs = {
-					"!.git",
-					"!.node_modules",
+				file_ignore_patterns = {
+					"node_modules",
+					".git",
 				},
 				path_display = { "truncate " },
 				mappings = {
