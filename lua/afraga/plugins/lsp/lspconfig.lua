@@ -136,6 +136,12 @@ return {
 			filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
 		})
 
+		-- configure templ server
+		lspconfig["templ"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
 		-- configure emmet language server
 		lspconfig["emmet_ls"].setup({
 			capabilities = capabilities,
