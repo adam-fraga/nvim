@@ -74,6 +74,20 @@ return {
 		lspconfig["html"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			filetypes = { "html", "templ" },
+		})
+
+		-- configure templ server
+		lspconfig["templ"].setup({
+			cmd = { "templ" },
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		lspconfig["htmx-lsp"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "html", "templ" },
 		})
 
 		-- configure typescript server with plugin
@@ -92,6 +106,8 @@ return {
 		lspconfig["tailwindcss"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+			init_options = { userLanguages = { templ = "html" } },
 		})
 
 		-- configure svelte server
@@ -134,12 +150,6 @@ return {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
-		})
-
-		-- configure templ server
-		lspconfig["templ"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
 		})
 
 		-- configure emmet language server
