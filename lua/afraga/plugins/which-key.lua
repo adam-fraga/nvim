@@ -21,10 +21,10 @@ return {
 		local wk = require("which-key")
 		wk.register({
 			C = {
-				name = "Chat GPT",
-				c = { "<cmd>:ChatGPT<cr>", "Prompt ChatGPT" },
-				a = { "<cmd>:ChatGPTActAs<cr>", "Act as" }, -- additional options for creating the keymap
-				C = { "<cmd>:ChatGPTCompleteCode", "Code completion" }, -- just a label. don't create any mapping
+				name = "AI Gen",
+				p = { "<cmd>:Gen<cr>", "Prompt AI" },
+				c = { "<cmd>:Gen Chat<cr>", "Chat AI" }, -- additional options for creating the keymap
+				m = { "<cmd>:require('gen').select_model<cr>", "Select model" }, -- additional options for creating the keymap
 			},
 			d = {
 				name = "Dap Debugger",
