@@ -20,11 +20,31 @@ return {
 	config = function()
 		local wk = require("which-key")
 		wk.register({
+			b = {
+				name = "Buffer",
+				n = { "<cmd>:bnext<cr>", "Next" },
+				p = { "<cmd>:bprev<cr>", "Previous" },
+				d = { "<cmd>:bdel<cr>", "Close" },
+				D = { "<cmd>:BufferCloseAllButCurrent<cr>", "Close all but current" },
+				h = { "<cmd>:BufferCloseBuffersLeft<cr>", "Close all to the left" },
+				l = { "<cmd>:BufferCloseBuffersRight<cr>", "Close all to the right" },
+				f = { "<cmd>:BufferPick<cr>", "Find" },
+				b = { "<cmd>:Telescope buffers<cr>", "List" },
+			},
 			C = {
 				name = "AI Gen",
-				p = { "<cmd>:Gen<cr>", "Prompt AI" },
+				a = { "<cmd>:Gen<cr>", "Prompt AI" },
 				c = { "<cmd>:Gen Chat<cr>", "Chat AI" }, -- additional options for creating the keymap
 				m = { "<cmd>:require('gen').select_model<cr>", "Select model" }, -- additional options for creating the keymap
+			},
+			P = {
+				name = "Custom Prompt",
+				a = { "<cmd>:Gen Translate_Fr<cr>", "Translate French" },
+				g = { "<cmd>:Gen Enhance_Grammar_Spelling<cr>", "Enhance Grammar" },
+				c = { "<cmd>:Gen Make_Concise<cr>", "Make Concise" },
+				r = { "<cmd>:Gen Review_Code<cr>", "Review Code" },
+				e = { "<cmd>:Gen Enhance_Code<cr>", "Enhance Code" },
+				m = { "<cmd>:Gen Change_Code<cr>", "Modify Code" },
 			},
 			d = {
 				name = "Dap Debugger",
