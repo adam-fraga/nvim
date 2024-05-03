@@ -9,7 +9,9 @@ return {
 		debug = false, -- Prints errors and the command which is run.
 	},
 	config = function()
-		require("gen").prompts["Translate_Fr"] = {
+		local gen = require("gen")
+
+		gen.prompts["Translate_Fr"] = {
 			prompt = "Translate the following text in Fr:\n$text",
 			replace = true,
 		}

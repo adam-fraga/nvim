@@ -35,16 +35,16 @@ return {
 				name = "AI Gen",
 				a = { "<cmd>:Gen<cr>", "Prompt AI" },
 				c = { "<cmd>:Gen Chat<cr>", "Chat AI" }, -- additional options for creating the keymap
-				m = { "<cmd>:require('gen').select_model<cr>", "Select model" }, -- additional options for creating the keymap
+				m = { "<cmd>:lua require('gen').select_model<cr>", "Select model" }, -- additional options for creating the keymap
 			},
 			P = {
 				name = "Custom Prompt",
-				a = { "<cmd>:Gen Translate_Fr<cr>", "Translate French" },
-				g = { "<cmd>:Gen Enhance_Grammar_Spelling<cr>", "Enhance Grammar" },
-				c = { "<cmd>:Gen Make_Concise<cr>", "Make Concise" },
 				r = { "<cmd>:Gen Review_Code<cr>", "Review Code" },
 				e = { "<cmd>:Gen Enhance_Code<cr>", "Enhance Code" },
 				m = { "<cmd>:Gen Change_Code<cr>", "Modify Code" },
+				s = { "<cmd>:Gen Make_Concise<cr>", "Make Short (Concise)" },
+				t = { "<cmd>:Gen Translate_Fr<cr>", "Translate French" },
+				g = { "<cmd>:Gen Enhance_Grammar_Spelling<cr>", "Enhance Grammar" },
 			},
 			d = {
 				name = "Dap Debugger",
