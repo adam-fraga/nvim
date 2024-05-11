@@ -94,6 +94,8 @@ return {
 				t = { "<cmd>:lua vim.lsp.buf.type_definition()<cr>", "Type definition" },
 				s = { "<cmd>:lua vim.lsp.buf.document_symbol()<cr>", "Document symbol" },
 				w = { "<cmd>:lua vim.lsp.buf.workspace_symbol()<cr>", "Workspace symbol" },
+				l = { "<cmd>:lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
+				a = { "<cmd>:lua vim.lsp.diagnostic.code_action()<cr>", "Code action" },
 			},
 			G = {
 				name = "Git Signs",
@@ -115,8 +117,6 @@ return {
 			},
 			l = {
 				name = "Lsp diagnostics",
-				a = { "<cmd>:lua vim.lsp.diagnostic.code_action()<cr>", "Code action" },
-				d = { "<cmd>:lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
 				l = { "<cmd>:lua vim.lsp.diagnostic.set_loclist()<cr>", "Set loclist" },
 				n = { "<cmd>:lua vim.lsp.diagnostic.goto_next()<cr>", "Next diagnostic" },
 				p = { "<cmd>:lua vim.lsp.diagnostic.goto_prev()<cr>", "Previous diagnostic" },
