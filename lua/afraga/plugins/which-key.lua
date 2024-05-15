@@ -35,7 +35,6 @@ return {
 				name = "AI Gen",
 				a = { "<cmd>:Gen<cr>", "Prompt AI" },
 				c = { "<cmd>:Gen Chat<cr>", "Chat AI" }, -- additional options for creating the keymap
-				m = { "<cmd>:lua require('gen').select_model<cr>", "Select model" }, -- additional options for creating the keymap
 			},
 			P = {
 				name = "Custom Prompt",
