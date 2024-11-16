@@ -22,13 +22,12 @@ return {
 			args = { "-m", "debugpy.adapter" },
 		}
 
-		dap.adapters.codelldb = {
-			type = "server",
-			port = "7888",
+		dap.adapters.lldb = {
+			type = "executable", --OR server
 			executable = {
 				-- Change this to your path!
-				command = "//usr/bin/lldb",
-				args = { "--port", "${port}" },
+				command = "/usr/bin/lldb",
+				name = "lldb",
 			},
 		}
 
@@ -60,15 +59,21 @@ return {
 		dap.configurations.rust = {
 			{
 				name = "Launch file",
-				type = "codelldb",
+				type = "lldb",
 				request = "launch",
 				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					local path = vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					print(path)
+					return path
 				end,
 				cwd = "${workspaceFolder}",
 				stopOnEntry = false,
 			},
 		}
+
+		dap.configurations.cpp = dap.configurations.rust
+		dap.configurations.c = dap.configurations.rust
+		dap.set_log_level("DEBUG")
 
 		dap.configurations.go = {
 			{
