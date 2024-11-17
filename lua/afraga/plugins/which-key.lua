@@ -19,108 +19,111 @@ return {
 
 	config = function()
 		local wk = require("which-key")
-		wk.register({
-			b = {
-				name = "Buffer",
-				n = { "<cmd>:bnext<cr>", "Next" },
-				p = { "<cmd>:bprev<cr>", "Previous" },
-				d = { "<cmd>:bdel<cr>", "Close" },
-				D = { "<cmd>:BufferCloseAllButCurrent<cr>", "Close all but current" },
-				h = { "<cmd>:BufferCloseBuffersLeft<cr>", "Close all to the left" },
-				l = { "<cmd>:BufferCloseBuffersRight<cr>", "Close all to the right" },
-				f = { "<cmd>:BufferPick<cr>", "Find" },
-				b = { "<cmd>:Telescope buffers<cr>", "List" },
+		wk.add({
+			-- Define the group for Buffer
+			{ "<leader>b", group = "Buffer" },
+			{ "<leader>bn", "<cmd>:bnext<cr>", desc = "Next" },
+			{ "<leader>bp", "<cmd>:bprev<cr>", desc = "Previous" },
+			{ "<leader>bd", "<cmd>:bdel<cr>", desc = "Close" },
+			{ "<leader>bD", "<cmd>:BufferCloseAllButCurrent<cr>", desc = "Close All But Current" },
+			{ "<leader>bh", "<cmd>:BufferCloseBuffersLeft<cr>", desc = "Close Buffers Left" },
+			{ "<leader>bl", "<cmd>:BufferCloseBuffersRight<cr>", desc = "Close Buffers Right" },
+			{ "<leader>bf", "<cmd>:BufferPick<cr>", desc = "Pick Buffer" },
+			{ "<leader>bb", "<cmd>:Telescope buffers<cr>", desc = "List Buffers" },
+
+			-- Define the group for AI Gen
+			{ "<leader>C", group = "AI Gen" },
+			{ "<leader>Ca", "<cmd>:Gen<cr>", desc = "Prompt AI" },
+			{ "<leader>Cc", "<cmd>:Gen Chat<cr>", desc = "Chat AI" },
+
+			-- Define the group for Custom Prompt
+			{ "<leader>P", group = "Custom Prompt" },
+			{ "<leader>Pr", "<cmd>:Gen Review_Code<cr>", desc = "Review Code" },
+			{ "<leader>Pe", "<cmd>:Gen Enhance_Code<cr>", desc = "Enhance Code" },
+			{ "<leader>Pm", "<cmd>:Gen Change_Code<cr>", desc = "Modify Code" },
+			{ "<leader>Ps", "<cmd>:Gen Make_Concise<cr>", desc = "Make Short (Concise)" },
+			{ "<leader>Pt", "<cmd>:Gen Translate_Fr<cr>", desc = "Translate French" },
+			{ "<leader>Pg", "<cmd>:Gen Enhance_Grammar_Spelling<cr>", desc = "Enhance Grammar" },
+
+			-- Define the group for Dap Debugger
+			{ "<leader>d", group = "Dap Debugger" },
+			{ "<leader>dx", "<cmd>:DapTerminate<cr>", desc = "Stop Debugger" },
+			{ "<leader>dc", "<cmd>:lua require('dap').continue()<cr>", desc = "Continue" },
+			{ "<leader>dt", "<cmd>:lua require('dap-go').debug_test()<cr>", desc = "Go Debug Test" },
+			{ "<leader>dl", "<cmd>:lua require('dap').run_last()<cr>", desc = "Run Last" },
+			{ "<leader>ds", "<cmd>:lua require('dap').step_over()<cr>", desc = "Step Over" },
+			{ "<leader>di", "<cmd>:lua require('dap').step_into()<cr>", desc = "Step Into" },
+			{ "<leader>do", "<cmd>:lua require('dap').step_out()<cr>", desc = "Step Out" },
+			{ "<leader>db", "<cmd>:lua require('dap').toggle_breakpoint()<cr>", desc = "Toggle Breakpoint" },
+			{
+				"<leader>dC",
+				"<cmd>:lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
+				desc = "Set Conditional Breakpoint",
 			},
-			C = {
-				name = "AI Gen",
-				a = { "<cmd>:Gen<cr>", "Prompt AI" },
-				c = { "<cmd>:Gen Chat<cr>", "Chat AI" }, -- additional options for creating the keymap
+			{ "<leader>dr", "<cmd>:lua require('dap').repl.toggle()<cr>", desc = "Toggle REPL" },
+			{ "<leader>dR", "<cmd>:lua require('dap').repl.open()<cr>", desc = "Open REPL" },
+
+			-- Define the group for Dap UI Debugger
+			{ "<leader>D", group = "Dap UI Debugger" },
+			{ "<leader>Dt", "<cmd>:lua require('dapui').toggle()<cr>", desc = "Toggle Dap UI" },
+			{ "<leader>Do", "<cmd>:lua require('dapui').open()<cr>", desc = "Open Dap UI" },
+			{ "<leader>Dc", "<cmd>:lua require('dapui').close()<cr>", desc = "Close Dap UI" },
+
+			-- Define the group for Explorer
+			{ "<leader>e", group = "Explorer" },
+			{ "<leader>ee", "<cmd>:NvimTreeToggle<cr>", desc = "Toggle Explorer" },
+			{ "<leader>er", "<cmd>:NvimTreeRefresh<cr>", desc = "Refresh Explorer" },
+			{ "<leader>ef", "<cmd>:NvimTreeFindFile<cr>", desc = "Find File in Explorer" },
+
+			-- Define the group for Telescope
+			{ "<leader>f", group = "Telescope" },
+			{ "<leader>ff", "<cmd>:Telescope find_files<cr>", desc = "Find Files" },
+			{ "<leader>fs", "<cmd>:Telescope live_grep<cr>", desc = "Live Grep" },
+			{ "<leader>fb", "<cmd>:Telescope buffers<cr>", desc = "Show Buffers" },
+			{ "<leader>fr", "<cmd>:Telescope lsp_references<cr>", desc = "Show References" },
+			{ "<leader>fh", "<cmd>:Telescope help_tags<cr>", desc = "Help Tags" },
+			{ "<leader>fk", "<cmd>:Telescope keymaps<cr>", desc = "Keymaps" },
+			{ "<leader>fp", "<cmd>:Telescope projects<cr>", desc = "Projects" },
+			{ "<leader>ft", "<cmd>:Telescope treesitter<cr>", desc = "Treesitter" },
+
+			-- Define the group for LSP Goto
+			{ "<leader>g", group = "Lsp Goto" },
+			{ "<leader>gd", "<cmd>:lua vim.lsp.buf.definition()<cr>", desc = "Go to Definition" },
+			{ "<leader>gr", "<cmd>:lua vim.lsp.buf.references()<cr>", desc = "Go to References" },
+			{ "<leader>gi", "<cmd>:lua vim.lsp.buf.implementation()<cr>", desc = "Go to Implementation" },
+			{ "<leader>gt", "<cmd>:lua vim.lsp.buf.type_definition()<cr>", desc = "Go to Type Definition" },
+			{ "<leader>gs", "<cmd>:lua vim.lsp.buf.document_symbol()<cr>", desc = "Document Symbols" },
+			{ "<leader>gw", "<cmd>:lua vim.lsp.buf.workspace_symbol()<cr>", desc = "Workspace Symbols" },
+			{
+				"<leader>gl",
+				"<cmd>:lua vim.lsp.diagnostic.show_line_diagnostics()<cr>",
+				desc = "Show Line Diagnostics",
 			},
-			P = {
-				name = "Custom Prompt",
-				r = { "<cmd>:Gen Review_Code<cr>", "Review Code" },
-				e = { "<cmd>:Gen Enhance_Code<cr>", "Enhance Code" },
-				m = { "<cmd>:Gen Change_Code<cr>", "Modify Code" },
-				s = { "<cmd>:Gen Make_Concise<cr>", "Make Short (Concise)" },
-				t = { "<cmd>:Gen Translate_Fr<cr>", "Translate French" },
-				g = { "<cmd>:Gen Enhance_Grammar_Spelling<cr>", "Enhance Grammar" },
-			},
-			d = {
-				name = "Dap Debugger",
-				x = { "<cmd>:DapTerminate<cr>", "Stop Debugger" },
-				c = { "<cmd>:lua require('dap').continue()<cr>", "Continue" },
-				t = { "<cmd>:lua require('dap-go').debug_test()<cr>", "Go Debug test" },
-				l = { "<cmd>:lua require('dap').run_last()<cr>", "Run last" },
-				s = { "<cmd>:lua require('dap').step_over()<cr>", "Step over" },
-				i = { "<cmd>:lua require('dap').step_into()<cr>", "Step into" },
-				o = { "<cmd>:lua require('dap').step_out()<cr>", "Step out" },
-				b = { "<cmd>:lua require('dap').toggle_breakpoint()<cr>", "Toggle breakpoint" },
-				C = {
-					"<cmd>:lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
-					"Set conditionnal breakpoint",
-				},
-				r = { "<cmd>:lua require('dap').repl.toggle()<cr>", "Toggle repl" },
-				R = { "<cmd>:lua require('dap').repl.open()<cr>", "Open repl" },
-			},
-			D = {
-				name = "Dap UI Debugger",
-				t = { "<cmd>:lua require('dapui').toggle()<cr>", "Toggle Dap UI" },
-				o = { "<cmd>:lua require('dapui').open()<cr>", "Open Dap UI" },
-				c = { "<cmd>:lua require('dapui').close()<cr>", "Close Dap UI" },
-			},
-			e = {
-				name = "Explorer",
-				e = { "<cmd>:NvimTreeToggle<cr>", "Toggle" },
-				r = { "<cmd>:NvimTreeRefresh<cr>", "Refresh" },
-				f = { "<cmd>:NvimTreeFindFile<cr>", "Find file" },
-			},
-			f = {
-				name = "Telescope",
-				f = { "<cmd>:Telescope find_files<cr>", "Find files" },
-				s = { "<cmd>:Telescope live_grep<cr>", "Live grep" },
-				b = { "<cmd>:Telescope buffers<cr>", "Show active buffers" },
-				r = { "<cmd>:Telescope lsp_references<cr>", "Show references" },
-				h = { "<cmd>:Telescope help_tags<cr>", "Help tags" },
-				k = { "<cmd>:Telescope keymaps<cr>", "Keymaps" },
-				p = { "<cmd>:Telescope projects<cr>", "Projects" },
-				t = { "<cmd>:Telescope treesitter<cr>", "Treesitter" },
-			},
-			g = {
-				name = "Lsp Goto",
-				d = { "<cmd>:lua vim.lsp.buf.definition()<cr>", "Definition" },
-				r = { "<cmd>:lua vim.lsp.buf.references()<cr>", "References" },
-				i = { "<cmd>:lua vim.lsp.buf.implementation()<cr>", "Implementation" },
-				t = { "<cmd>:lua vim.lsp.buf.type_definition()<cr>", "Type definition" },
-				s = { "<cmd>:lua vim.lsp.buf.document_symbol()<cr>", "Document symbol" },
-				w = { "<cmd>:lua vim.lsp.buf.workspace_symbol()<cr>", "Workspace symbol" },
-				l = { "<cmd>:lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
-				a = { "<cmd>:lua vim.lsp.diagnostic.code_action()<cr>", "Code action" },
-			},
-			G = {
-				name = "Git Signs",
-				a = { "<cmd>:Gitsigns stage_buffer<cr>", "Stage buffer" },
-				r = { "<cmd>:Gitsigns reset_buffer<cr>", "Reset buffer" },
-				d = { "<cmd>:Gitsigns diffthis<cr>", "Diff buffer" },
-				v = { "<cmd>:Gitsigns preview_hunk<cr>", "Visualize changes" },
-				n = { "<cmd>:Gitsigns next_hunk<cr>", "Next hunk" },
-				p = { "<cmd>:Gitsigns previous_hunk<cr>", "Previous hunk" },
-				b = { "<cmd>:Gitsigns blame_line<cr>", "Blame line" },
-			},
-			h = {
-				name = "Harpoon",
-				t = { "<cmd>:lua require('harpoon.term').gotoTerminal(1)<cr>", "Terminal 1" },
-				T = { "<cmd>:lua require('harpoon.term').gotoTerminal(2)<cr>", "Terminal 2" },
-				a = { "<cmd>:lua require('harpoon.mark').add_file()<cr>", "Add file" },
-				d = { "<cmd>:lua require('harpoon.mark').delete_file()<cr>", "Delete file" },
-				h = { "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<cr>", "Toggle quick menu" },
-			},
-			l = {
-				name = "Lsp diagnostics",
-				l = { "<cmd>:lua vim.lsp.diagnostic.set_loclist()<cr>", "Set loclist" },
-				n = { "<cmd>:lua vim.lsp.diagnostic.goto_next()<cr>", "Next diagnostic" },
-				p = { "<cmd>:lua vim.lsp.diagnostic.goto_prev()<cr>", "Previous diagnostic" },
-				f = { "<cmd>:lua vim.lsp.buf.formatting()<cr>", "Format" },
-			},
-		}, { prefix = "<leader>" })
+			{ "<leader>ga", "<cmd>:lua vim.lsp.diagnostic.code_action()<cr>", desc = "Code Action" },
+
+			-- Define the group for Git Signs
+			{ "<leader>G", group = "Git Signs" },
+			{ "<leader>Ga", "<cmd>:Gitsigns stage_buffer<cr>", desc = "Stage Buffer" },
+			{ "<leader>Gr", "<cmd>:Gitsigns reset_buffer<cr>", desc = "Reset Buffer" },
+			{ "<leader>Gd", "<cmd>:Gitsigns diffthis<cr>", desc = "Diff Buffer" },
+			{ "<leader>Gv", "<cmd>:Gitsigns preview_hunk<cr>", desc = "Preview Changes" },
+			{ "<leader>Gn", "<cmd>:Gitsigns next_hunk<cr>", desc = "Next Hunk" },
+			{ "<leader>Gp", "<cmd>:Gitsigns previous_hunk<cr>", desc = "Previous Hunk" },
+			{ "<leader>Gb", "<cmd>:Gitsigns blame_line<cr>", desc = "Blame Line" },
+
+			-- Define the group for Harpoon
+			{ "<leader>h", group = "Harpoon" },
+			{ "<leader>ht", "<cmd>:lua require('harpoon.term').gotoTerminal(1)<cr>", desc = "Terminal 1" },
+			{ "<leader>hT", "<cmd>:lua require('harpoon.term').gotoTerminal(2)<cr>", desc = "Terminal 2" },
+			{ "<leader>ha", "<cmd>:lua require('harpoon.mark').add_file()<cr>", desc = "Add File" },
+			{ "<leader>hd", "<cmd>:lua require('harpoon.mark').delete_file()<cr>", desc = "Delete File" },
+			{ "<leader>hh", "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Toggle Quick Menu" },
+
+			-- Define the group for LSP Diagnostics
+			{ "<leader>l", group = "Lsp diagnostics" },
+			{ "<leader>ll", "<cmd>:lua vim.lsp.diagnostic.set_loclist()<cr>", desc = "Set Loclist" },
+			{ "<leader>ln", "<cmd>:lua vim.lsp.diagnostic.goto_next()<cr>", desc = "Next Diagnostic" },
+			{ "<leader>lp", "<cmd>:lua vim.lsp.diagnostic.goto_prev()<cr>", desc = "Previous Diagnostic" },
+		})
 	end,
 }
