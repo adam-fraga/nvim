@@ -94,6 +94,7 @@ return {
 			{ "<leader>gt", "<cmd>:lua vim.lsp.buf.type_definition()<cr>", desc = "Go to Type Definition" },
 			{ "<leader>gs", "<cmd>:lua vim.lsp.buf.document_symbol()<cr>", desc = "Document Symbols" },
 			{ "<leader>gw", "<cmd>:lua vim.lsp.buf.workspace_symbol()<cr>", desc = "Workspace Symbols" },
+			{ "<leader>gf", "<cmd>:lua vim.diagnostic.open_float()<cr>", desc = "Show diag current line" },
 			{
 				"<leader>gl",
 				"<cmd>:lua vim.lsp.diagnostic.show_line_diagnostics()<cr>",
