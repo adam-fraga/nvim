@@ -6,9 +6,6 @@ return {
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	config = function()
-		-- import lspconfig plugin
-		local lspconfig = require("lspconfig")
-
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -46,12 +43,6 @@ return {
 			opts.desc = "Show line diagnostics"
 			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
-			opts.desc = "Go to previous diagnostic"
-			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-
-			opts.desc = "Go to next diagnostic"
-			keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
 			opts.desc = "Show documentation for what is under cursor"
 			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
@@ -71,48 +62,65 @@ return {
 		end
 
 		-- configure html server
-		lspconfig["html"].setup({
+		vim.lsp.config("html", {
 			capabilities = capabilities,
 			on_attach = on_attach,
-			filetypes = { "html", "templ" },
+			filetypes = { "html", "templ", "svelte" },
 		})
+		vim.lsp.enable({ "html" })
 
 		-- configure templ server
-		lspconfig["templ"].setup({
+		vim.lsp.config("templ", {
 			cmd = { "templ" },
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
 
-		lspconfig["htmx"].setup({
+		vim.lsp.enable({ "templ" })
+
+		vim.lsp.config("htmx", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "html", "templ" },
 		})
 
-		-- configure typescript server with plugin
-		lspconfig["ts_ls"].setup({
+		vim.lsp.enable({ "htmx" })
+
+		vim.lsp.config("astro", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
+
+		vim.lsp.enable({ "astro" })
+
+		-- configure typescript server with plugin
+		vim.lsp.config("ts_ls", {
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		vim.lsp.enable({ "ts_ls" })
 
 		-- configure css server
-		lspconfig["cssls"].setup({
+		vim.lsp.config("cssls", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
 
+		vim.lsp.enable({ "cssls" })
+
 		-- configure php server
-		lspconfig["intelephense"].setup({
+		vim.lsp.config("intelephense", {
 			cmd = { "intelephense", "--stdio" },
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "php", "blade" },
 			format = { true },
 		})
+		vim.lsp.enable({ "intelephense" })
 
 		-- configure tailwindcss server
-		lspconfig["tailwindcss"].setup({
+		vim.lsp.config("tailwindcss", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = {
@@ -169,9 +177,10 @@ return {
 			},
 			init_options = { userLanguages = { templ = "html" } },
 		})
+		vim.lsp.enable({ "tailwindcss" })
 
 		-- configure svelte server
-		lspconfig["svelte"].setup({
+		vim.lsp.config("svelte", {
 			capabilities = capabilities,
 			on_attach = function(client, bufnr)
 				on_attach(client, bufnr)
@@ -187,60 +196,70 @@ return {
 			end,
 		})
 
-		-- configure prisma orm server
-		lspconfig["prismals"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		vim.lsp.enable({ "svelte" })
 
-		lspconfig["jsonls"].setup({
+		-- configure prisma orm server
+		vim.lsp.config("prismals", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
+		vim.lsp.enable({ "prismals" })
+
+		vim.lsp.config("jsonls", {
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+		vim.lsp.enable({ "jsonls" })
 
 		-- configure rust server
-		lspconfig["rust_analyzer"].setup({
+		vim.lsp.config("rust_analyzer", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
+		vim.lsp.enable({ "rust_analyzer" })
 
 		-- configure Cpp/C  server
-		lspconfig["clangd"].setup({
+		vim.lsp.config("clangd", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			cmd = { "clangd" },
 			filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 			single_file_support = true,
 		})
+		vim.lsp.enable({ "clangd" })
 
 		-- configure graphql language server
-		lspconfig["graphql"].setup({
+		vim.lsp.config("graphql", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
 		})
+		vim.lsp.enable({ "graphql" })
 
-		lspconfig["gopls"].setup({
+		vim.lsp.config("gopls", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
 		})
+		vim.lsp.enable({ "gopls" })
 
 		-- configure emmet language server
-		lspconfig["emmet_ls"].setup({
+		vim.lsp.config("emmet_ls", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 		})
+		vim.lsp.enable({ "emmet_ls" })
 
 		-- configure python server
-		lspconfig["pyright"].setup({
+		vim.lsp.config("pyright", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
+		vim.lsp.enable({ "pyright" })
 
 		-- configure lua server (with special settings)
-		lspconfig["lua_ls"].setup({
+		vim.lsp.config("lua_ls", {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			settings = { -- custom settings for lua
@@ -259,5 +278,7 @@ return {
 				},
 			},
 		})
+
+		vim.lsp.enable({ "lua_ls" })
 	end,
 }
